@@ -7,7 +7,9 @@ from fastapi import HTTPException
 from database import get_database
 from bson.objectid import ObjectId
 from fastapi.middleware.cors import CORSMiddleware
+from json import loads
 from os import path
+from bson.json_util import  dumps
 
 app = FastAPI()
 
@@ -33,6 +35,25 @@ class NetworkDevice(BaseModel):
     username: str
     password: str
 
+
+
+def serialize(data):
+    
+    def format_id(data):
+        data['id'] = data['_id']['$oid']
+        del data['_id']
+        return data
+
+    data = loads(dumps(data))
+    if(type(data) is list):
+        data = list(map(format_id, data))
+        return data
+    elif(type(data) is dict):
+        data = format_id(data)
+        return data
+
+
+
 @app.get("/")
 async def read_root():
     return {"Status": "Ok"}
@@ -41,20 +62,20 @@ async def read_root():
 @app.get("/devices")
 async def get_all_devices():
     network_device_collection = db["network_device"]
-    result = list(network_device_collection.find({}, {'_id': False, "interfaces":False, "ssh":False }))
-    return JSONResponse(status_code=status.HTTP_200_OK, content=result)
+    result = network_device_collection.find({}, {"interfaces":False, "ssh":False })
+    data = serialize(result)
+    return JSONResponse(status_code=status.HTTP_200_OK, content=data)
 
 
 @app.get("/devices/{id}")
 async def get_device_detail(id: str):
     oid = ObjectId(id)
     network_device_collection = db["network_device"]
-    device = network_device_collection.find_one({"_id": oid}, {'_id': False, "ssh":False })
-
+    device = network_device_collection.find_one({"_id": oid}, { "ssh":False })
     if device is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= f"Device {id} is not found")
-    
-    return JSONResponse(status_code=status.HTTP_200_OK, content=device)
+    data = serialize(device)
+    return JSONResponse(status_code=status.HTTP_200_OK, content=data)
 
     
 @app.post("/devices")
@@ -93,7 +114,7 @@ async def insert_device(network_device: NetworkDevice):
 
     network_device_collection = db["network_device"]
     new_device =  network_device_collection.insert_one(data)
-    inserted_device = network_device_collection.find_one({"_id": new_device.inserted_id}, {'_id': False})
-    
-    return JSONResponse(status_code= status.HTTP_201_CREATED, content= inserted_device)
+    inserted_device = network_device_collection.find_one({"_id": new_device.inserted_id})
+    data = serialize(inserted_device)
+    return JSONResponse(status_code= status.HTTP_201_CREATED, content= data)
 
