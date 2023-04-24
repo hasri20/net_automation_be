@@ -1,9 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,HTTPException
 from app.utils import serialize
 from fastapi import  status
 from netmiko import ConnectHandler
 from fastapi.responses import JSONResponse
-from fastapi import HTTPException
 from bson.objectid import ObjectId
 from app.database import db
 from app.models import NetworkDevice, NetworkDeviceUpdate
@@ -71,6 +70,10 @@ async def insert_device(network_device: NetworkDevice):
 async def update_device(id: str, network_device: NetworkDeviceUpdate):
     oid = ObjectId(id)
     network_device_collection = db["network_device"]
+    device = network_device_collection.find_one({"_id": oid})
+    if device is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= f"Device {id} is not found")
+    currentDevice = serialize(device)
 
     if(network_device.use_payload):
         ssh = {
@@ -80,8 +83,6 @@ async def update_device(id: str, network_device: NetworkDeviceUpdate):
             "password":network_device.password,
         }
     else:
-        device = network_device_collection.find_one({"_id": oid})
-        currentDevice = serialize(device)
         ssh = currentDevice['ssh']
     
     try:

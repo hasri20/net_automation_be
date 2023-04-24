@@ -1,0 +1,101 @@
+Building configuration...
+
+Current configuration : 991 bytes
+!
+! Last configuration change at 10:37:49 UTC Wed Apr 19 2023
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R7200_NEW
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable password admin
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+ip domain name test.com
+ip cef
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 password 0 admin
+!
+!
+!
+!
+!
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address dhcp
+ duplex full
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+ duplex full
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+ duplex full
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+snmp-server community public RO
+!
+!
+control-plane
+!
+!
+line con 0
+ stopbits 1
+line aux 0
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end

@@ -2,7 +2,7 @@ from pydantic import BaseModel,Field
 
 class NetworkDevice(BaseModel):
     device_type: str 
-    host: str =  Field(None, description="Who sends the error message.")
+    host: str =  Field(None)
     username: str
     password: str
 
