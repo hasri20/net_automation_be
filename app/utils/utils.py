@@ -3,7 +3,11 @@ from bson.json_util import dumps
 
 def serialize(data):   
     def format_id(data):
-        data['id'] = data['_id']['$oid']
+
+        if '_id' in data:
+            data['id'] = data['_id']['$oid']
+        if 'created_at' in data:
+            data['created_at'] = data['created_at']['$date']
         del data['_id']
         return data
 

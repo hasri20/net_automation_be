@@ -1,120 +1,16 @@
 
-R7200_NEW#
-R7200_NEW#terminal width 511
-R7200_NEW#terminal length 0
-R7200_NEW#
-R7200_NEW#
-R7200_NEW#
-R7200_NEW#configure terminal
+ROUTER_3725#
+ROUTER_3725#terminal width 511
+ROUTER_3725#terminal length 0
+ROUTER_3725#
+ROUTER_3725#
+ROUTER_3725#
+ROUTER_3725#configure terminal
 Enter configuration commands, one per line.  End with CNTL/Z.
-R7200_NEW(config)#
-R7200_NEW(config)#Building configuration...
-                    ^
-% Invalid input detected at '^' marker.
-
-R7200_NEW(config)#
-R7200_NEW(config)#Current configuration : 991 bytes
-                   ^
-% Invalid input detected at '^' marker.
-
-R7200_NEW(config)#!
-R7200_NEW(config)#! Last configuration change at 10:37:49 UTC Wed Apr 19 2023
-R7200_NEW(config)#!
-R7200_NEW(config)#version 15.2
-R7200_NEW(config)#service timestamps debug datetime msec
-R7200_NEW(config)#service timestamps log datetime msec
-R7200_NEW(config)#!
-R7200_NEW(config)#hostname R7200_NEW
-R7200_NEW(config)#!
-R7200_NEW(config)#boot-start-marker
-R7200_NEW(config)#boot-end-marker
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#enable password admin
-R7200_NEW(config)#!
-R7200_NEW(config)#no aaa new-model
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#ip domain name test.com
-R7200_NEW(config)#ip cef
-R7200_NEW(config)#no ipv6 cef
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#multilink bundle-name authenticated
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#username ******** privilege 15 password 0 ********
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#ip ssh version 2
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#interface FastEthernet0/0
-R7200_NEW(config-if)# ip address dhcp
-R7200_NEW(config-if)# duplex full
-R7200_NEW(config-if)#!
-R7200_NEW(config-if)#interface Ethernet1/0
-R7200_NEW(config-if)# no ip address
-R7200_NEW(config-if)# shutdown
-R7200_NEW(config-if)# duplex full
-R7200_NEW(config-if)#!
-R7200_NEW(config-if)#interface Ethernet1/1
-R7200_NEW(config-if)# no ip address
-R7200_NEW(config-if)# shutdown
-R7200_NEW(config-if)# duplex full
-R7200_NEW(config-if)#!
-R7200_NEW(config-if)#interface Ethernet1/2
-R7200_NEW(config-if)# no ip address
-R7200_NEW(config-if)# shutdown
-R7200_NEW(config-if)# duplex full
-R7200_NEW(config-if)#!
-R7200_NEW(config-if)#interface Ethernet1/3
-R7200_NEW(config-if)# no ip address
-R7200_NEW(config-if)# shutdown
-R7200_NEW(config-if)# duplex full
-R7200_NEW(config-if)#!
-R7200_NEW(config-if)#ip forward-protocol nd
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#no ip http server
-R7200_NEW(config)#no ip http secure-server
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#snmp-server community public RO
-R7200_NEW(config)#!
-R7200_NEW(config)#!
-R7200_NEW(config)#control-plane
-R7200_NEW(config-cp)#!
-R7200_NEW(config-cp)#!
-R7200_NEW(config-cp)#line con 0
-R7200_NEW(config-line)# stopbits 1
-R7200_NEW(config-line)#line aux 0
-R7200_NEW(config-line)# stopbits 1
-R7200_NEW(config-line)#line vty 0 4
-R7200_NEW(config-line)# login local
-R7200_NEW(config-line)# transport input ssh
-R7200_NEW(config-line)#!
-R7200_NEW(config-line)#!
-R7200_NEW(config-line)#end
-R7200_NEW#
-R7200_NEW#
-R7200_NEW#exit
+ROUTER_3725(config)#
+ROUTER_3725(config)#snmp-server community public RO
+ROUTER_3725(config)#
+ROUTER_3725(config)#end
+ROUTER_3725#
+ROUTER_3725#
+ROUTER_3725#exit

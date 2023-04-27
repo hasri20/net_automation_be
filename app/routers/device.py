@@ -25,6 +25,7 @@ async def get_device_detail(id: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail= f"Device {id} is not found")
     data = serialize(device)
     return JSONResponse(status_code=status.HTTP_200_OK, content=data)
+
     
 @router.post("/devices")
 async def insert_device(network_device: NetworkDevice):
@@ -86,7 +87,6 @@ async def update_device(id: str, network_device: NetworkDeviceUpdate):
         ssh = currentDevice['ssh']
     
     try:
-        print(ssh)
         connection = ConnectHandler(
             device_type= ssh['device_type'],
                 host= ssh['host'], 

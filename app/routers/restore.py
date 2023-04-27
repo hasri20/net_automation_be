@@ -1,18 +1,14 @@
 
-from fastapi import APIRouter,status,HTTPException
-from fastapi import Form, FastAPI
+from fastapi import APIRouter, status, HTTPException
 from fastapi.responses import JSONResponse
 from app.database import db
-from json import loads
-from bson.json_util import dumps
 from app.utils import serialize
 from bson.objectid import ObjectId
 from netmiko import ConnectHandler
-from datetime import datetime
-from pydantic import BaseModel
-from typing_extensions import Annotated
 
 router = APIRouter()
+
+backup_dir = 'backup_files/'
 
 @router.post("/restore/{backup_file_id}")
 async def restore_device_config(backup_file_id: str):    
@@ -48,10 +44,9 @@ async def restore_device_config(backup_file_id: str):
     
 
     connection.enable()
-    running_config = connection.send_config_from_file(current_backup_file['filename'])
-    print(running_config)
+    connection.send_config_from_file(backup_dir + current_backup_file['filename'])
     connection.disconnect()
     
 
-    return JSONResponse(status_code=status.HTTP_200_OK, content=123)
+    return JSONResponse(status_code=status.HTTP_200_OK, content={'status':"Success"})
 
