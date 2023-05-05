@@ -1,3 +1,11 @@
+CC
+               ___ ___ _  _ _   _ ___
+              | _ )_ _| \| | | | / __|
+              | _ \| || .` | |_| \__ \
+              |___/___|_|\_|\___/|___/
+
+                   !! WARNING !!
+    Access is restricted to authorized users only.
 
 ROUTER_3725#
 ROUTER_3725#terminal width 511
@@ -5,12 +13,133 @@ ROUTER_3725#terminal length 0
 ROUTER_3725#
 ROUTER_3725#
 ROUTER_3725#
-ROUTER_3725#configure terminal
-Enter configuration commands, one per line.  End with CNTL/Z.
-ROUTER_3725(config)#
-ROUTER_3725(config)#snmp-server community public RO
-ROUTER_3725(config)#
-ROUTER_3725(config)#end
-ROUTER_3725#
+ROUTER_3725#show run
+Building configuration...
+
+Current configuration : 1462 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname ROUTER_3725
+!
+boot-start-marker
+boot-end-marker
+!
+enable password ********
+!
+no aaa new-model
+memory-size iomem 5
+ip cef
+!
+!
+!
+!
+ip domain name test.com
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username ******** privilege 15 password 0 ********
+archive
+ log config
+  hidekeys
+! 
+!
+!
+!
+ip ssh version 2
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.10.10.10 255.255.255.0
+!
+interface FastEthernet0/0
+ ip address dhcp
+ speed auto
+ full-duplex
+!
+interface FastEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+ip forward-protocol nd
+!
+!
+ip http server
+no ip http secure-server
+!
+ip access-list standard OAM
+ permit 0.0.0.0 255.255.255.0
+!
+snmp-server community BINUS RO OAM
+snmp-server ifindex persist
+snmp-server trap link ietf
+snmp-server location BINUS
+snmp-server contact muhammad.ghazali001@binus.ac.id
+snmp-server host 10.1.1.1 B!NU$ 
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+!
+banner exec ^CCC
+               ___ ___ _  _ _   _ ___
+              | _ )_ _| \| | | | / __|
+              | _ \| || .` | |_| \__ \
+              |___/___|_|\_|\___/|___/
+
+                   !! WARNING !!
+    Access is restricted to authorized users only.
+^C
+!
+line con 0
+line aux 0
+line vty 0 4
+ login local
+ transport input ssh
+!
+ntp server 10.2.1.1 prefer
+ntp server 10.2.1.3
+ntp server 10.2.1.2
+!
+end
+
 ROUTER_3725#
 ROUTER_3725#exit

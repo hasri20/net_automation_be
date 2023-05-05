@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from os import path
-from .routers import device, monitor, summary, backup, restore, provision
+from .routers import device, monitor, summary, backup, restore, provision, logging
 
 app = FastAPI()
 
@@ -25,6 +25,7 @@ app.include_router(summary.router)
 app.include_router(backup.router)
 app.include_router(restore.router)
 app.include_router(provision.router)
+app.include_router(logging.router)
 
 @app.get("/")
 async def read_root():

@@ -78,7 +78,7 @@ async def update_device(id: str, network_device: NetworkDeviceUpdate):
 
     if(network_device.use_payload):
         ssh = {
-            "device_type":network_device.device_type,
+            "device_type":currentDevice['ssh']['device_type'],
             "host": network_device.host,
             "username":network_device.username,
             "password":network_device.password,

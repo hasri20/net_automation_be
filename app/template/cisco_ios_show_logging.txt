@@ -1,0 +1,13 @@
+Value NUMBER (\d+)
+Value MONTH (\S+)
+Value DAY (\d{1,2})
+Value TIME ((\d+:\d+:\d+\.\d+)|(\d+:\d+:\d+)|(\d{1,2}:\d{1,2}))
+Value TIMEZONE (\S{3})
+Value FACILITY (\w+)
+Value SEVERITY (\d)
+Value MNEMONIC (\S+)
+Value List MESSAGE (.+)
+
+Start
+  ^Log\s+Buffer
+  ^${MONTH}\s+${DAY}\s+${TIME}\s+${TIMEZONE}:\s+%${FACILITY}-${SEVERITY}-${MNEMONIC}:\s+${MESSAGE}$$ -> Record
