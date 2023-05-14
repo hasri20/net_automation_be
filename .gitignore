@@ -2,3 +2,4 @@ __pycache__
 .env
 venv
 backup_files/*
+template_files/*
