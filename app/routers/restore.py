@@ -44,6 +44,9 @@ async def restore_device_config(backup_file_id: str):
         )
     except Exception as e:
         print(e)
+
+        network_device_collection.update_one(
+            {"_id": network_device_id}, {"$set": {"isValid": False}})
         return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to connect to devices")
 
     try:
