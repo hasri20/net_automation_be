@@ -13,4 +13,4 @@ except OperationFailure as err:
     print(f"Data Base Connection failed. Error: {err}")
 
 
-db = connection['test']
+db = connection['network_app']
